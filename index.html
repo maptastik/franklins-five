@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>SXSW Parties</title>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+  <link href='./css/style.css' rel='stylesheet' />
+</head>
+<body>
+<div class='sidebar'>
+  <div class='heading'>
+    <h1>Franklin's Five</h1>
+  </div>
+  <div id='listings' class='listings'></div>
+</div>
+<div id='map' class='map'> </div>
+<script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoibHl6aWRpYW1vbmQiLCJhIjoiRkh4OW9layJ9.P2o48WlCqjhGmqoFJl3C_A';
+  var map = L.mapbox.map('map', 'mapbox.wheatpaste')
+        .setView([38.200905, -84.873284], 11);
+
+  var listings = document.getElementById('listings');
+  var locations = L.mapbox.featureLayer().addTo(map);
+
+  locations.loadURL('./data/franklinFive.geojson');
+
+  function setActive(el) {
+    var siblings = listings.getElementsByTagName('div');
+    for (var i = 0; i < siblings.length; i++) {
+      siblings[i].className = siblings[i].className
+        .replace(/active/, '').replace(/\s\s*$/, '');
+    }
+
+    el.className += ' active';
+  }
+
+  locations.on('ready', function() {
+    locations.eachLayer(function(locale) {
+
+      // Shorten locale.feature.properties to just `prop` so we're not
+      // writing this long form over and over again.
+      var prop = locale.feature.properties;
+
+      // Each marker on the map.
+      var popup = '<h3>' + prop.name + '</h3><div><img src="./img/' + prop.imgUrl + '"/><small>Image Source: ' + prop.imgSrc + '</small></div>';
+
+      var listing = listings.appendChild(document.createElement('div'));
+          listing.className = 'item';
+
+      var link = listing.appendChild(document.createElement('a'));
+          link.href = '#';
+          link.className = 'title';
+
+      link.innerHTML = prop.name + '<br><small class="quiet">' + prop.built + '</small>';
+
+      var details = listing.appendChild(document.createElement('div'));
+      details.innerHTML = prop.description ;
+
+      link.onclick = function() {
+        setActive(listing);
+
+        // When a menu item is clicked, animate the map to center
+        // its associated locale and open its popup.
+        map.setView(locale.getLatLng(), 16);
+        locale.openPopup();
+        return false;
+      };
+
+      // Marker interaction
+      locale.on('click', function(e) {
+          // 1. center the map on the selected marker.
+          map.panTo(locale.getLatLng());
+
+          // 2. Set active the markers associated listing.
+          setActive(listing);
+      });
+
+      popup += '</div>';
+      locale.bindPopup(popup);
+    });
+  });
+
+  locations.on('layeradd', function(e) {
+    var marker = e.layer;
+    marker.setIcon(L.mapbox.marker.icon({
+      'marker-size': 'large',
+      'marker-symbol': 'rocket',
+      'marker-color': '#1ebac0'
+    }));
+  });
+</script>
+</body>
+</html>
