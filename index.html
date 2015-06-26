@@ -36,31 +36,37 @@
 //   subdomains: '1234'
 // }).addTo(map);
 
-var planeBase = L.tileLayer('http://plaintiles.herokuapp.com/black/X/Y/Z.png').addTo(map);
+var grayBase = L.tileLayer.grayscale('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    boundary: geom
+  }).addTo(map);
 
-  L.TopoJSON = L.GeoJSON.extend({  
-  addData: function(jsonData) {    
-    if (jsonData.type === "Topology") {
-      for (key in jsonData.objects) {
-        geojson = topojson.feature(jsonData, jsonData.objects[key]);
-        L.GeoJSON.prototype.addData.call(this, geojson);
-      }
-    }    
-    else {
-      L.GeoJSON.prototype.addData.call(this, jsonData);
-    }
-  }  
-});
+// var planeBase = L.tileLayer('http://plaintiles.herokuapp.com/black/X/Y/Z.png').addTo(map);
 
-  var topoLayer =  new L.TopoJSON();
+//   L.TopoJSON = L.GeoJSON.extend({  
+//   addData: function(jsonData) {    
+//     if (jsonData.type === "Topology") {
+//       for (key in jsonData.objects) {
+//         geojson = topojson.feature(jsonData, jsonData.objects[key]);
+//         L.GeoJSON.prototype.addData.call(this, geojson);
+//       }
+//     }    
+//     else {
+//       L.GeoJSON.prototype.addData.call(this, jsonData);
+//     }
+//   }  
+// });
 
-  $.getJSON('data/kyCounties_line.topo.json')
-  .done(addTopoData);
+//   var topoLayer =  new L.TopoJSON();
 
-  function addTopoData(topoData){  
-    topoLayer.addData(topoData);
-    topoLayer.addTo(map);
-  }
+//   $.getJSON('data/kyCounties_line.topo.json')
+//   .done(addTopoData);
+
+//   function addTopoData(topoData){  
+//     topoLayer.addData(topoData);
+//     topoLayer.addTo(map);
+//   }
 
 
   var tileLayer = new L.TileLayer.boundaryCanvas('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
