@@ -36,44 +36,31 @@
 //   subdomains: '1234'
 // }).addTo(map);
 
-var grayBase = L.tileLayer.grayscale('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    boundary: geom
+var grayBase = L.tileLayer.grayscale('http://api.tiles.mapbox.com/v4/maptastik.mj8cpjb6/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwdGFzdGlrIiwiYSI6IjNPMkREV1kifQ.2KGPFZD0QaGfvYzXYotTXQ', {
+  attribution: 'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  id: 'maptastik',
+  accessToken: 'pk.eyJ1IjoibWFwdGFzdGlrIiwiYSI6IjNPMkREV1kifQ.2KGPFZD0QaGfvYzXYotTXQ'
+}).addTo(map);
+
+
+
+  var tileLayer = new L.TileLayer.boundaryCanvas('http://api.tiles.mapbox.com/v4/maptastik.mj8cpjb6/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwdGFzdGlrIiwiYSI6IjNPMkREV1kifQ.2KGPFZD0QaGfvYzXYotTXQ', {
+  attribution: 'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: 'abcd',
+  id: 'maptastik',
+  accessToken: 'pk.eyJ1IjoibWFwdGFzdGlrIiwiYSI6IjNPMkREV1kifQ.2KGPFZD0QaGfvYzXYotTXQ',
+  boundary: geom
   }).addTo(map);
 
-// var planeBase = L.tileLayer('http://plaintiles.herokuapp.com/black/X/Y/Z.png').addTo(map);
+  // var countyStyle = {
+  //     'fillColor': 'green',
+  //     'color': 'red'
+  // };
 
-//   L.TopoJSON = L.GeoJSON.extend({  
-//   addData: function(jsonData) {    
-//     if (jsonData.type === "Topology") {
-//       for (key in jsonData.objects) {
-//         geojson = topojson.feature(jsonData, jsonData.objects[key]);
-//         L.GeoJSON.prototype.addData.call(this, geojson);
-//       }
-//     }    
-//     else {
-//       L.GeoJSON.prototype.addData.call(this, jsonData);
-//     }
-//   }  
-// });
-
-//   var topoLayer =  new L.TopoJSON();
-
-//   $.getJSON('data/kyCounties_line.topo.json')
-//   .done(addTopoData);
-
-//   function addTopoData(topoData){  
-//     topoLayer.addData(topoData);
-//     topoLayer.addTo(map);
-//   }
-
-
-  var tileLayer = new L.TileLayer.boundaryCanvas('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    boundary: geom
-  }).addTo(map);
+  // var franklin = L.mapbox.featureLayer();
+  // franklin.loadURL('./data/franklin_poly.geojson');
+  // franklin.setStyle({style: countyStyle}).addTo(map);
 
   var listings = document.getElementById('listings');
   var locations = L.mapbox.featureLayer().addTo(map);
