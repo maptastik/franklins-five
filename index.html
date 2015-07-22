@@ -24,8 +24,13 @@
 <div id='map' class='map'> </div>
 <script>
   L.mapbox.accessToken = 'pk.eyJ1IjoibWFwdGFzdGlrIiwiYSI6IjNPMkREV1kifQ.2KGPFZD0QaGfvYzXYotTXQ';
-  var map = L.mapbox.map('map', '')
+  var map = L.mapbox.map('map', '', {
+    attributionControl: false
+  })
         .setView([38.200905, -84.873284], 11);
+
+  var credits = L.control.attribution().addTo(map);
+  credits.addAttribution('Text &amp; Images: <span style="color: #9999cc"><a href="https://www.facebook.com/FranklinCountyTrust" target="_blank">Franklin County Trust for Historic Preservation</a></span>');
 
 var grayBase = L.tileLayer.grayscale('http://api.tiles.mapbox.com/v4/maptastik.mj8cpjb6/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwdGFzdGlrIiwiYSI6IjNPMkREV1kifQ.2KGPFZD0QaGfvYzXYotTXQ', {
   attribution: 'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
