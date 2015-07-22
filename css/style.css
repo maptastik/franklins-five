@@ -1,6 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=IM+Fell+Great+Primer|IM+Fell+Great+Primer+SC);
 body {
       color:#404040;
-      font:400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+      font:15px/22px 'IM Fell Great Primer', serif;
       margin:0;
       padding:0;
       -webkit-font-smoothing:antialiased;
@@ -28,6 +29,7 @@ body {
       top:0;left:0;
       overflow:hidden;
       border-right:1px solid rgba(0,0,0,0.25);
+      background-image: url(../img/roughclothP.png);
       }
     .pad2 {
       padding:20px;
@@ -42,11 +44,13 @@ body {
       top:0;bottom:0;
       }
     .heading {
-      background:#fff;
+      background:#666666;
       border-bottom:1px solid #eee;
       height:60px;
       line-height:60px;
       padding:0 10px;
+      font-family: "IM Fell Great Primer SC", serif;
+      color: #fefefe;
       }
     .listings {
       height:100%;
@@ -62,18 +66,19 @@ body {
       .listings .item:last-child { border-bottom:none; }
       .listings .item .title {
         display:block;
-        color:#1ebac0;
-        font-weight:700;
+        color:#666;
+        font-weight:bold;
+        font-family: "IM Fell Great Primer SC", serif;
         }
         .listings .item .title small { font-weight:400; }
         .listings .item.active .title,
-        .listings .item .title:hover { color:#acc; }
+        .listings .item .title:hover { color:#9966FF; }
         .listings .item.active {
-          background-color:#f8f8f8;
+          background-image: url(../img/roughcloth.png);
           }
 
       ::-webkit-scrollbar {
-        width:3px;
+        width:10px;
         height:3px;
         border-left:0;
         background:rgba(0,0,0,0.1);
@@ -82,7 +87,7 @@ body {
         background:none;
         }
       ::-webkit-scrollbar-thumb {
-        background:#1ebac0;
+        background:#9966FF;
         border-radius:0;
         }
 
@@ -100,7 +105,7 @@ body {
       display:none;
       }
     .leaflet-popup-content {
-      font:400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+      font:15px/22px 'IM Fell Great Primer', serif;
       padding:0;
       width:250px;
       }
@@ -108,14 +113,14 @@ body {
         padding:0;
         }
       .leaflet-popup-content h3 {
-        background:#a5e3e5;
-        color:#222;
+        background:#9999cc;
+        color:#fff;
         margin:0;
         display:block;
         padding:10px;
         border-radius:3px 3px 0 0;
-        font-weight:700;
         margin-top:-15px;
+        font-family: "IM Fell Great Primer SC", serif;
         }
       .leaflet-popup-content div {
         padding:10px;
